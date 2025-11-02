@@ -49,11 +49,10 @@ export const TagView: React.FC<{
     }
   };
 
-  const handleNameSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const handleNameSubmit = () => {
       onUpdate({ ...node, name: tempName });
       setIsEditingName(false);
-    }
+    
   };
 
   const handleNameClick = () => {
@@ -69,9 +68,9 @@ export const TagView: React.FC<{
           className="bg-[#e4e4e3]! border border-gray-300! hover:bg-[#6cacef] focus:outline-0 outline-0 rounded p-1"
         >
           {node.collapsed ? (
-            <ChevronRight size={16} />
+            <ChevronRight size={18} />
           ) : (
-            <ChevronDown size={16} />
+            <ChevronDown size={18} />
           )}
         </button>
         
@@ -80,8 +79,10 @@ export const TagView: React.FC<{
             type="text"
             value={tempName}
             onChange={(e) => setTempName(e.target.value)}
-            onKeyDown={handleNameSubmit}
-            onBlur={() => setIsEditingName(false)}
+                      onBlur={() => {
+                          setIsEditingName(false);
+                          handleNameSubmit();
+                      }}
             autoFocus
             className="bg-[#e4e4e3]! border border-gray-300! text-black px-2 py-2 rounded flex-1 outline-none"
           />

@@ -16,6 +16,7 @@ function App() {
       { name: 'child2', data: 'c2 World' }
     ]
   });
+  const [exportString, setExportString] = useState("");
 
   const cleanTreeForExport = (node: TreeNode): any => {
     const result: any = { name: node.name };
@@ -33,43 +34,30 @@ function App() {
   const handleExport = () => {
     const cleanedTree = cleanTreeForExport(tree);
     const jsonString = JSON.stringify(cleanedTree, null, 2);
-    
-    // Create a modal or alert to show the exported JSON
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
-    modal.innerHTML = `
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-auto">
-        <h2 class="text-xl font-bold mb-4">Exported JSON</h2>
-        <pre class="bg-gray-100 p-4 rounded overflow-auto text-sm">${jsonString}</pre>
-        <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-          Close
-        </button>
-      </div>
-    `;
-    
-    modal.querySelector('button')?.addEventListener('click', () => {
-      document.body.removeChild(modal);
-    });
-    
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        document.body.removeChild(modal);
-      }
-    });
-    
-    document.body.appendChild(modal);
+    setExportString(jsonString);
   };
+
+  const handleExportClose = () => {
+    setExportString('');
+  }
 
   return (
        <div className="min-h-screen bg-gray-50 p-8 w-screen">
           <TagView node={tree} onUpdate={setTree} />
-          <div>
-            <button
-            onClick={handleExport}
-            className="bg-[#e0e0df]! border border-gray-300! text-black px-6 py-2 rounded-lg font-semibold"
-          >
-            Export
-          </button></div>
+        <div>
+        {!exportString ? <button
+          onClick={handleExport}
+          className="bg-[#e0e0df]! border border-gray-300! text-black px-6 py-2 rounded-lg font-semibold"
+        >
+          Export
+        </button> :<div><button
+          onClick={handleExportClose}
+          className="bg-[#e0e0df]! border border-gray-300! text-black px-6 py-2  font-semibold"
+        >
+          Export Close
+        </button> 
+          <p className='text-black'>{exportString}</p></div>}
+      </div>
     </div>
   )
 }
