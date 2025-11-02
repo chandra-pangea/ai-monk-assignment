@@ -61,23 +61,16 @@ function App() {
   };
 
   return (
-    <>
-        <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Nested Tags Tree</h1>
-          <button
+       <div className="min-h-screen bg-gray-50 p-8 w-screen">
+          <TagView node={tree} onUpdate={setTree} />
+          <div>
+            <button
             onClick={handleExport}
-            className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold"
+            className="bg-[#e0e0df]! border border-gray-300! text-black px-6 py-2 rounded-lg font-semibold"
           >
             Export
-          </button>
-        </div>
-        
-        <TagView node={tree} onUpdate={setTree} />
-      </div>
+          </button></div>
     </div>
-    </>
   )
 }
 

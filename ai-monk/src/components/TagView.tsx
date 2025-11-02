@@ -64,12 +64,11 @@ export const TagView: React.FC<{
   };
 
   return (
-    <div className="border-2 border-blue-500 rounded-lg overflow-hidden mb-2">
-      {/* Header */}
-      <div className="bg-blue-500 text-white p-2 flex items-center gap-2">
+    <div className="border border-[#6cacef] rounded-lg overflow-hidden mb-2 w-full">
+      <div className="bg-[#6cacef] text-black p-2 flex items-center gap-2 w-full">
         <button
           onClick={toggleCollapse}
-          className="hover:bg-blue-600 rounded p-1"
+          className="bg-[#e4e4e3]! border border-gray-300! hover:bg-[#6cacef] focus:outline-0 outline-0 rounded p-1"
         >
           {node.collapsed ? (
             <ChevronRight size={16} />
@@ -86,12 +85,12 @@ export const TagView: React.FC<{
             onKeyDown={handleNameSubmit}
             onBlur={() => setIsEditingName(false)}
             autoFocus
-            className="bg-white text-black px-2 py-1 rounded flex-1 outline-none"
+            className="bg-[#e4e4e3]! border border-gray-300! text-black px-2 py-2 rounded flex-1 outline-none"
           />
         ) : (
           <span
             onClick={handleNameClick}
-            className="flex-1 cursor-pointer hover:bg-blue-600 px-2 py-1 rounded"
+            className="flex-1 cursor-pointer hover:bg-[#6cacef] px-2 py-1 rounded"
           >
             {node.name}
           </span>
@@ -99,26 +98,27 @@ export const TagView: React.FC<{
 
         <button
           onClick={handleAddChild}
-          className="bg-green-500 hover:bg-green-600 px-3 py-1 rounded flex items-center gap-1 text-sm"
+          className="bg-[#e4e4e3]! border border-gray-300! px-3 py-1 rounded flex items-center gap-1 text-sm"
         >
-          <Plus size={14} />
           Add Child
         </button>
       </div>
 
-      {/* Content */}
       {!node.collapsed && (
-        <div className="p-3 bg-white">
+        <div className="p-3 bg-[#e4e4e3]!">
           {node.data !== undefined ? (
+            <div className='text-black flex items-center gap-2 font-medium text-lg'>
+                          Data
             <input
               type="text"
               value={node.data}
               onChange={(e) => handleDataChange(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-[40%] bg-white border border-gray-300! text-black  rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6cacef]"
               placeholder="Enter data"
             />
+            </div>
           ) : (
-            <div className="space-y-2 pl-4">
+            <div className="space-y-2 pl-2 ">
               {node.children?.map((child, index) => (
                 <TagView
                   key={index}
