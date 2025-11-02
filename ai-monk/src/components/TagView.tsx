@@ -31,11 +31,9 @@ export const TagView: React.FC<{
     };
 
     if (node.data !== undefined) {
-      // Replace data with children
       const { data, ...rest } = node;
       onUpdate({ ...rest, children: [newChild] });
     } else {
-      // Add to existing children
       onUpdate({
         ...node,
         children: [...(node.children || []), newChild]
